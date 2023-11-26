@@ -6,17 +6,13 @@
 using namespace std;
 
 double* GaussianElimination(Matrix& matrix) {
-	//const int row_size = nvars + 1, total_size = nvars * row_size;
-
 	for (int k = 0; k < matrix.getheight()-1; k++) {
 		double& a1 = matrix.at(k, k);
 
 		for (int row = k+1; row < matrix.getheight(); row++) {
 			double& a2 = matrix.at(row, k);
 
-			//cout << "k=" << k << "; row=" << row << ";" << endl;
 			for (int i = k + 1; i < matrix.getwidth(); i++) {
-				//cout << "main: " << matrix[k * row_size + i] * a2 << ";   sub: " << matrix[row * row_size + i] * a1 << endl;
 
 				matrix.at(row, i) = matrix.at(k, i) * a2 - matrix.at(row, i) * a1;
 			}
