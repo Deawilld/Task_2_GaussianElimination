@@ -22,5 +22,8 @@ int main()
 	}
 	cout << endl;
 
+	delete[] solution;
+	delete matrixptr;
+
 	return 0;
 }
