@@ -12,7 +12,7 @@ endif()
 project ("Task_2_GaussianElimination")
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (Task_2_GaussianElimination "GaussianElimination.cpp" "GaussianElimination.h" "Matrix.h" "Matrix.cpp" "main.cpp")
+add_executable (Task_2_GaussianElimination "GaussianElimination.cpp" "GaussianElimination.h" "Matrix.h" "Matrix.cpp" "main.cpp" "RandomDouble.h" "RandomDouble.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Task_2_GaussianElimination PROPERTY CXX_STANDARD 20)

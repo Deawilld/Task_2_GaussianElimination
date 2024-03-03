@@ -5,12 +5,12 @@
 
 using namespace std;
 
-double* GaussianElimination(Matrix& matrix) {
+int GaussianElimination(Matrix& matrix, double* solution_ptr) {
 	for (int k = 0; k < matrix.getheight()-1; k++) {
-		double& a1 = matrix.at(k, k);
+		double a1 = matrix.at(k, k);
 
 		for (int row = k+1; row < matrix.getheight(); row++) {
-			double& a2 = matrix.at(row, k);
+			double a2 = matrix.at(row, k);
 
 			for (int i = k + 1; i < matrix.getwidth(); i++) {
 
@@ -21,32 +21,27 @@ double* GaussianElimination(Matrix& matrix) {
 		}
 	}
 
-	double* result = new double[matrix.getheight()];
-
 	for (int k = matrix.getheight()-1; k >= 0; k--) {
 		double &this_el = matrix.at(k, k);
 		double &free_el = matrix.at(k, matrix.getwidth() - 1);
 
 		if (this_el == 0) {
 			if (free_el == 0) {
-				cout << "Infinite set of solutions\n";
+				return GAUSS_INFINITE_SOLS;
 			}
 			else {
-				cout << "No solutions\n";
+				return GAUSS_NO_SOLS;
 			}
-
-			delete[] result;
-			return nullptr;
 		}
 
 		double tmp_sum = free_el;
 		for (int i = k+1; i < matrix.getwidth() - 1; i++) {
-			tmp_sum -= matrix.at(k, i) * result[i];
+			tmp_sum -= matrix.at(k, i) * solution_ptr[i];
 		}
-		result[k] = tmp_sum / this_el;
+		solution_ptr[k] = tmp_sum / this_el;
 	}
 
-	return result;
+	return GAUSS_SUCCESS;
 }
 
 
@@ -62,7 +57,7 @@ void printMatrix(Matrix& matrix) {
 Matrix* loadMatrixFromFile(const char* filename) {
 	ifstream filein("input.txt");
 	if (!filein.is_open()) {
-		cout << "Failed to open input file" << endl;
+		cerr << "Failed to open input file" << endl;
 		return nullptr;
 	}
 	int height = 0;
@@ -72,13 +67,13 @@ Matrix* loadMatrixFromFile(const char* filename) {
 	
 	for (int i = 0; i < matrix->totalSize(); i++) {
 		if (filein.eof()) {
-			cout << "Error: end of file!\n";
+			cerr << "Error: end of file!\n";
 			delete matrix;
 			return nullptr;
 		}
 		filein >> (*matrix)[i];
 		if (filein.fail()) {
-			cout << "Error: failed to read a value!\n";
+			cerr << "Error: failed to read a value!\n";
 			delete matrix;
 			return nullptr;
 		}
