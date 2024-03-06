@@ -81,6 +81,8 @@ void runAccuracyTest() {
 		cout << "\n";
 	}
 
+	cout << "Size: " << n << "\n";
+
 	cout << "Status: ";
 	switch (status) {
 	case GAUSS_SUCCESS:
