@@ -1,4 +1,7 @@
+#pragma once
+
 #include "stdint.h"
+#pragma hdrstop
 
 class RandomDouble {
 	uint64_t x;

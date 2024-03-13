@@ -1,7 +1,8 @@
-﻿#include "GaussianElimination.h"
-#include "Matrix.h"
-#include <iostream>
+﻿#include <iostream>
 #include <fstream>
+#pragma hdrstop
+#include "GaussianElimination.h"
+#include "Matrix.h"
 
 using namespace std;
 

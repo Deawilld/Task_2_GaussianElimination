@@ -1,8 +1,9 @@
-#include "GaussianElimination.h"
-#include "RandomDouble.h"
 #include <chrono>
 #define _USE_MATH_DEFINES
 #include <math.h>
+#pragma hdrstop
+#include "GaussianElimination.h"
+#include "RandomDouble.h"
 
 using namespace std;
 
@@ -43,8 +44,7 @@ void runGauusian()
 	delete matrixptr;
 }
 
-void runAccuracyTest() {
-	const size_t n = 20;
+void runAccuracyTest(const size_t n) {
 	Matrix matrix(n);
 
 	RandomDouble rnd(123456789);
@@ -104,7 +104,7 @@ void runAccuracyTest() {
 	double max_diff = 0;
 
 	for (int i = 0; i < n; i++) {
-		difference_abs[i] = x[i] - solution[i];
+		difference_abs[i] = abs(x[i] - solution[i]);
 
 		//square_sum += difference_abs[i] * difference_abs[i];
 		abs_sum += difference_abs[i];
@@ -117,7 +117,10 @@ void runAccuracyTest() {
 }
 
 int main() {
-	runAccuracyTest();
+	int n;
+	cout << "Test n: \n";
+	cin >> n;
+	runAccuracyTest(n);
 	return 0;
 }
 

@@ -1,5 +1,6 @@
-#include "RandomDouble.h"
 #include <math.h>
+#pragma hdrstop
+#include "RandomDouble.h"
 
 void RandomDouble::my_hash(int iters) {
 	for (int i = 0; i < iters; i++) {
